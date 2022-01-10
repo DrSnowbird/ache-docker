@@ -1,9 +1,9 @@
 version: '3.1' 
 
 services:
-  java11-non-root:
-    container_name: java11-non-root
-    image: openkbs/java11-non-root
+  ache-docker:
+    container_name: ache-docker
+    image: openkbs/ache-docker
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,12 +12,12 @@ services:
     env_file:
       - ./.env
     environment:
-      - CONTAINER_NAME=java11-non-root
+      - CONTAINER_NAME=ache-docker
       - USER_ID=${USER_ID:-1000}
       - GROUP_ID=${GROUP_ID:-1000}
       # - APP_HOME=${APP_HOME:-/home/developer/app}
       # - APP_MAIN=${APP_MAIN:-setup.sh}
-      - DOCKER_HOST_IP=${DOCKER_HOST_IP:-192.168.0.121}
+      - DOCKER_HOST_IP=${DOCKER_HOST_IP:-0.0.0.0}
       - DOCKER_HOST_NAME=${DOCKER_HOST_NAME:-aurora}
     ## -------------------------------------------
     ## -- Change to your specific Volumes Mapping:
@@ -29,8 +29,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       #- ./certificates:/home/developer/certificates
       ## ==== Use $HOME/data-docker as base directory: ====
-      - $HOME/data-docker/java11-non-root/data:/home/developer/data
-      - $HOME/data-docker/java11-non-root/workspace:/home/developer/workspace
+      - $HOME/data-docker/ache-docker/data:/home/developer/data
+      - $HOME/data-docker/ache-docker/workspace:/home/developer/workspace
       ## ==== Use current directory as root for mapping Volumes: ====
       ## (You need to manually create those child directory: ./data, ./workspace, and others)
       #- ./data:/home/developer/data
@@ -42,8 +42,8 @@ services:
     ## -------------------------------
     # ports:
     #   - "12345:12345"
-    ports:
-      - "3000:3000"
+    #ports:
+    #  - "3000:3000"
 
     ## -----------------------------
     ## -- Network setup if needed --
